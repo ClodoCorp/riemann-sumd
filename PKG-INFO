@@ -1,0 +1,27 @@
+Metadata-Version: 1.0
+Name: riemann-sumd
+Version: 0.2.1
+Summary: Agent for scheduling event generating processes and sending the results to Riemann.
+Home-page: 
+Author: Brian Hatfield
+Author-email: bmhatfield@gmail.com
+License: BSD
+Description: # riemann-sumd
+
+        Riemann-sumd is an agent for scheduling 'tasks', such as commands that conform to 
+        the Nagios plugin interface, and sending the results to Riemann. There are multiple 
+        task interfaces, such as the Nagios plugin interface, a JSON interface over stdout, 
+        and a JSON interface from arbitrary URLs.
+
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: Log Analysis
+Classifier: Topic :: Utilities
+Classifier: Topic :: System :: Networking :: Monitoring
