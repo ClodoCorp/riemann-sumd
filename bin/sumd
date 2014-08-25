@@ -147,7 +147,7 @@ def main():
     if not options.foreground:
         log.info("Creating pidfile with PID: %s" % (pidfile(create=True)))
 
-    if not options.suspend:
+    if options.suspend:
         log.info("Suspend tasks for {}s".format(options.suspend))
         time.sleep(float(options.suspend))
         log.info("Continue to start.")
