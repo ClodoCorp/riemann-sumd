@@ -53,6 +53,7 @@ parser.add_option("--log-dir", dest="log_directory", default="/var/log", help="D
 parser.add_option("--config-dir", dest="config_directory", default="/etc/sumd", help="Root path where tasks.d and tags.d can be found")
 parser.add_option("--run-dir", dest="run_directory", default="/var/run", help="Directory for where pidfiles should be placed")
 parser.add_option("--foreground", dest="foreground", action='store_true', default=False, help="Don't daemonize.")
+parser.add_option("--suspend", dest="suspend", default=0, help="Suspend time before task starting.")
 parser.add_option("--debug", dest="debug", action='store_true', default=False, help="Increase logger verbosity")
 (options, args) = parser.parse_args()
 
@@ -145,6 +146,11 @@ def main():
 
     if not options.foreground:
         log.info("Creating pidfile with PID: %s" % (pidfile(create=True)))
+
+    if not options.suspend:
+        log.info("Suspend tasks for {}s".format(options.suspend))
+        time.sleep(float(options.suspend))
+        log.info("Continue to start.")
 
     # Create scheduler
     schedule = scheduler.TaskSchedule()
