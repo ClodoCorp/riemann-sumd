@@ -165,7 +165,11 @@ def main():
     enable_threads.set()
 
     # Create riemann client
-    riemann = bernhard.Client(host=options.riemann_host, port=options.riemann_port, transport=bernhard.UDPTransport)
+    riemann = []
+    if type(options.riemann_host) not in (list, tuple):
+        options.riemann_host = [options.riemann_host]
+    for host in options.riemann_host:
+        riemann.append(bernhard.Client(host=host, port=options.riemann_port, transport=bernhard.UDPTransport))
 
     # Create worker pool
     workers = []
