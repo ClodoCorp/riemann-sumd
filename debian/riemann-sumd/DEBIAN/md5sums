@@ -1,0 +1,9 @@
+0494c6e22b82b9ff262a1c939b92aee9  opt/sumd/bin/sumd
+7f3185772b10e91289b1f102010cc38a  opt/sumd/lib/event.py
+52f7f7ff59f9bc2b5ff0a63b5fc3b0c0  opt/sumd/lib/loader.py
+157608a456b417b3573980f9b64f7632  opt/sumd/lib/scheduler.py
+1bb669a9af0ce4f0de5f040f529e9c4f  opt/sumd/lib/sender.py
+4387fe6b04366ab75e29b5c364b22d2a  opt/sumd/lib/task.py
+eee72f51c3f5ef19e897b0acae36088e  usr/share/doc/riemann-sumd/changelog.Debian.gz
+26fa549746af215386956bce5acd4333  usr/share/doc/riemann-sumd/copyright
+5518f9181a4cdb11235e536cf85264d7  usr/share/pyshared/riemann_sumd-0.2.2.egg-info

@@ -1,0 +1,4 @@
+/etc/sumd/sumd.conf
+/etc/sumd/tasks.d/simple.task.example
+/etc/sumd/tags.d/simple.tag.example
+/etc/init/sumd.conf

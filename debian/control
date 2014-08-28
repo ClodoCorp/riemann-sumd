@@ -1,0 +1,13 @@
+Source: riemann-sumd
+Maintainer: Eugene Alekseev <ealekseev@clodo.ru>
+Section: python
+Priority: optional
+Build-Depends: python-all (>= 2.6.6-3), debhelper (>= 7.4.3)
+Standards-Version: 3.9.1
+X-Python-Version: >= 2.6
+
+Package: riemann-sumd
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-daemon, python-yaml, python-protobuf, python-bernhard, python-requests
+Description: Python agent for scheduling event generating processes and s
+

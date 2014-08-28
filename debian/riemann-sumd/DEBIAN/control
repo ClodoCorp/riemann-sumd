@@ -1,0 +1,9 @@
+Package: riemann-sumd
+Version: 0.2.2-1
+Architecture: all
+Maintainer: Eugene Alekseev <ealekseev@clodo.ru>
+Installed-Size: 101
+Depends: python (>= 2.7), python (<< 2.8), python-daemon, python-yaml, python-protobuf, python-bernhard, python-requests
+Section: python
+Priority: optional
+Description: Python agent for scheduling event generating processes and s
