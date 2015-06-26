@@ -187,7 +187,7 @@ class NagiosTask(SubProcessTask):
     exitcodes = {
      -127: 'timeout',
         0: 'ok',
-        1: 'warn',
+        1: 'warning',
         2: 'critical',
         3: 'unknown'
     }
