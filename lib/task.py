@@ -142,9 +142,13 @@ class HTTPJSONTask(Task):
                 event.description = "%s\nWarn threshold: %s, Error threshold: %s" % (note,
                                                                                      metric['warn_threshold'],
                                                                                      metric['error_threshold'])
+                if 'attributes' in metric:
+                    event.attributes = metric['attributes']
+
                 self.events.append(event)
         except Exception as e:
             log.error("Exception joining CloudKickTask '%s'\n%s" % (self.name, str(e)))
+            self.locked = False
 
 
 class SubProcessTask(Task):
@@ -274,7 +278,7 @@ class JSONTask(SubProcessTask):
                 event.attributes = self.attributes
 
                 if "attributes" in result:
-                    event.attributes.update({self.attrprefix + name: result["attributes"][name] for name in result["attributes"]})
+                    event.attributes.update(dict((self.attrprefix + name, result["attributes"][name]) for name in result["attributes"]))
 
                 event.service = result['service']
                 event.state = result['state']

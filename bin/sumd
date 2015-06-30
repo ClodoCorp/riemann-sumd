@@ -55,6 +55,10 @@ parser.add_option("--run-dir", dest="run_directory", default="/var/run", help="D
 parser.add_option("--foreground", dest="foreground", action='store_true', default=False, help="Don't daemonize.")
 parser.add_option("--suspend", dest="suspend", default=0, help="Suspend time before task starting.")
 parser.add_option("--debug", dest="debug", action='store_true', default=False, help="Increase logger verbosity")
+parser.add_option("--client-key-file", dest="client_key_file", help="Path to client SSL key file")
+parser.add_option("--client-cert-file", dest="client_cert_file", help="Path to client SSL cert file")
+parser.add_option("--ca-certs-file", dest="ca_certs_file", help="Path to SSL CA certs file")
+
 (options, args) = parser.parse_args()
 
 # Load global config options. If the command-line options are still at their
@@ -126,6 +130,21 @@ def load_configs(schedule):
     for task in tasks:
         schedule.add(task)
 
+def riemann_client():
+    if options.client_key_file != None and options.client_cert_file != None:
+        riemann = bernhard.SSLClient(
+            host=options.riemann_host,
+            port=options.riemann_port,
+            keyfile=options.client_key_file,
+            certfile=options.client_cert_file,
+            ca_certs=options.ca_certs_file)
+    else:
+        riemann = bernhard.Client(
+            host=options.riemann_host,
+            port=options.riemann_port,
+            transport=bernhard.UDPTransport)
+
+    return riemann
 
 def main():
     # Configure logging, must be done inside main to preserve file handling.
@@ -164,17 +183,10 @@ def main():
     enable_threads = threading.Event()
     enable_threads.set()
 
-    # Create riemann client
-    riemann = []
-    if type(options.riemann_host) not in (list, tuple):
-        options.riemann_host = [options.riemann_host]
-    for host in options.riemann_host:
-        riemann.append(bernhard.Client(host=host, port=options.riemann_port, transport=bernhard.UDPTransport))
-
     # Create worker pool
     workers = []
     for i in range(options.worker_limit):
-        worker = sender.EventSender(tasks, riemann, enable_threads)
+        worker = sender.EventSender(tasks, riemann_client(), enable_threads)
         worker.start()
         workers.append(worker)
 
