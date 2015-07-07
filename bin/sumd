@@ -131,18 +131,22 @@ def load_configs(schedule):
         schedule.add(task)
 
 def riemann_client():
-    if options.client_key_file != None and options.client_cert_file != None:
-        riemann = bernhard.SSLClient(
-            host=options.riemann_host,
-            port=options.riemann_port,
-            keyfile=options.client_key_file,
-            certfile=options.client_cert_file,
-            ca_certs=options.ca_certs_file)
-    else:
-        riemann = bernhard.Client(
-            host=options.riemann_host,
-            port=options.riemann_port,
-            transport=bernhard.UDPTransport)
+    riemann = []
+    if type(options.riemann_host) not in (list, tuple):
+            options.riemann_host = [options.riemann_host]
+    for h in options.riemann_host:
+        if options.client_key_file != None and options.client_cert_file != None:
+            riemann.append(bernhard.SSLClient(
+                host=h,
+                port=options.riemann_port,
+                keyfile=options.client_key_file,
+                certfile=options.client_cert_file,
+                ca_certs=options.ca_certs_file))
+        else:
+            riemann.append(bernhard.Client(
+                host=h,
+                port=options.riemann_port,
+                transport=bernhard.UDPTransport))
 
     return riemann
 
